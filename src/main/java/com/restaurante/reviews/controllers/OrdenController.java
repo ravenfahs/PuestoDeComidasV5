@@ -2,6 +2,7 @@ package com.restaurante.reviews.controllers;
 
 import com.restaurante.reviews.models.Orden;
 import com.restaurante.reviews.models.OrdenComestibles;
+import com.restaurante.reviews.models.modeloDTO.OrdenDTO;
 import com.restaurante.reviews.models.models_auxiliar.OrdenRequest;
 import com.restaurante.reviews.repository.*;
 import com.restaurante.reviews.service.OrdenService;
@@ -38,7 +39,7 @@ public class OrdenController {
         return ordenService.crearOrden(ordenRequest);
     }
 
-@GetMapping("/api/orden")
+/*@GetMapping("/api/orden")
     public List<Orden> getOrdenes(){
 
      OrdenService ordenService = new OrdenService(ordenRepository,
@@ -60,5 +61,17 @@ public class OrdenController {
                 ordenComesRepository);
 
         return ordenService.getOrden(id);
+    }*/
+
+    @GetMapping("/api/orden")
+    public List<OrdenDTO> getOrden(){
+
+        OrdenService ordenService = new OrdenService(ordenRepository,
+                clienteRepository,
+                comestiblesRepository,
+                restauranteRepository,
+                ordenComesRepository);
+
+        return ordenService.getOrdenes();
     }
 }

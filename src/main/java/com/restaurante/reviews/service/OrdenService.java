@@ -1,6 +1,8 @@
 package com.restaurante.reviews.service;
 
 import com.restaurante.reviews.models.*;
+import com.restaurante.reviews.models.modeloDTO.OrdenComestibleDTO;
+import com.restaurante.reviews.models.modeloDTO.OrdenDTO;
 import com.restaurante.reviews.models.models_auxiliar.ComidaEnOrden;
 import com.restaurante.reviews.models.models_auxiliar.OrdenRequest;
 import com.restaurante.reviews.repository.*;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -70,11 +73,64 @@ public class OrdenService {
         return ResponseEntity.ok("Orden creada exitosamente.");
     }
 
-    public List<Orden> getOrdenes() {
+  /*  public List<Orden> getOrdenes() {
         return (List<Orden>) ordenRepository.findAll();
+    }*/
+
+    public List<OrdenDTO> getOrdenes()  {
+
+        try {
+            List<Orden> entidadOrden = (List<Orden>) ordenRepository.findAll();
+            List<OrdenDTO> ordenesDTO = new ArrayList<>();
+
+
+            for (Orden orden : entidadOrden) {
+                OrdenDTO ordenDTO = new OrdenDTO();
+
+                ordenDTO.setId(orden.getId());
+                ordenDTO.setEstado(orden.getEstado());
+                ordenDTO.setFecha_hora(orden.getFechaHora());
+                ordenDTO.setTiempoEntrega(orden.getTiempoEntrega());
+                ordenDTO.setTotal(orden.getPrecioTotal());
+                ordenDTO.setCliente(orden.getCliente());
+                ordenDTO.setComidas(comestiblesDeOrden(orden.getId()));
+
+                ordenesDTO.add(ordenDTO);
+            }
+
+            return ordenesDTO;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    
+
+    private List<OrdenComestibleDTO> comestiblesDeOrden(Long id) throws Exception {
+
+        List<OrdenComestibles> entidadOrdenComestible = ordenComesRepository.findByOrden_Id(id);
+
+        if (entidadOrdenComestible.isEmpty()) throw new Exception();
+
+        List<OrdenComestibleDTO> comestiblesOrden = new ArrayList<>();
+
+        for (OrdenComestibles ordenComestibles: entidadOrdenComestible) {
+
+            OrdenComestibleDTO ordenComestibleDTO = new OrdenComestibleDTO();
+            ordenComestibleDTO.setNombre(ordenComestibles.getComestibles().getNombre());
+            ordenComestibleDTO.setDescripcion(ordenComestibles.getComestibles().getDescripcion());
+            ordenComestibleDTO.setCantidad(ordenComestibles.getCantidad());
+
+            comestiblesOrden.add(ordenComestibleDTO);
+        }
+
+        return comestiblesOrden;
     }
 
     public List<OrdenComestibles> getOrden(Long id) {
         return ordenComesRepository.findByOrden_Id(id);
     }
+
+
 }
