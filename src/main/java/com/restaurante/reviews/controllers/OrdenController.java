@@ -1,11 +1,10 @@
 package com.restaurante.reviews.controllers;
 
-import com.restaurante.reviews.models.Orden;
-import com.restaurante.reviews.models.OrdenComestibles;
 import com.restaurante.reviews.models.modeloDTO.OrdenDTO;
 import com.restaurante.reviews.models.models_auxiliar.OrdenRequest;
 import com.restaurante.reviews.repository.*;
-import com.restaurante.reviews.service.OrdenService;
+import com.restaurante.reviews.service.CrearOrdenService;
+import com.restaurante.reviews.service.ObtenerOrdenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +29,7 @@ public class OrdenController {
     @PostMapping("/api/orden")
     public ResponseEntity<String> registrarOrden(@RequestBody OrdenRequest ordenRequest){
 
-        OrdenService ordenService = new OrdenService(ordenRepository,
+        CrearOrdenService ordenService = new CrearOrdenService(ordenRepository,
                 clienteRepository,
                 comestiblesRepository,
                 restauranteRepository,
@@ -66,12 +65,8 @@ public class OrdenController {
     @GetMapping("/api/orden")
     public List<OrdenDTO> getOrden(){
 
-        OrdenService ordenService = new OrdenService(ordenRepository,
-                clienteRepository,
-                comestiblesRepository,
-                restauranteRepository,
-                ordenComesRepository);
+        ObtenerOrdenService obtenerOrdenService = new ObtenerOrdenService(ordenRepository,ordenComesRepository);
 
-        return ordenService.getOrdenes();
+        return obtenerOrdenService.getOrdenes();
     }
 }

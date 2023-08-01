@@ -3,7 +3,6 @@ package com.restaurante.reviews.models;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.awt.geom.Point2D;
-import java.util.List;
 
 @Data
 @Entity
