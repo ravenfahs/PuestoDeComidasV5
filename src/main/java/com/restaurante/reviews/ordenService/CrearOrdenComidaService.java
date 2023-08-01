@@ -1,4 +1,4 @@
-package com.restaurante.reviews.service;
+package com.restaurante.reviews.ordenService;
 
 import com.restaurante.reviews.models.Comestibles;
 import com.restaurante.reviews.models.Orden;

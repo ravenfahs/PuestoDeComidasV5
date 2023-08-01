@@ -2,9 +2,10 @@ package com.restaurante.reviews.controllers;
 
 import com.restaurante.reviews.models.modeloDTO.OrdenDTO;
 import com.restaurante.reviews.models.models_auxiliar.OrdenRequest;
+import com.restaurante.reviews.ordenService.ObtenerOrdenByIdService;
 import com.restaurante.reviews.repository.*;
-import com.restaurante.reviews.service.CrearOrdenService;
-import com.restaurante.reviews.service.ObtenerOrdenService;
+import com.restaurante.reviews.ordenService.CrearOrdenService;
+import com.restaurante.reviews.ordenService.ObtenerOrdenesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,36 +38,19 @@ public class OrdenController {
 
         return ordenService.crearOrden(ordenRequest);
     }
+    @GetMapping("/api/orden")
+    public List<OrdenDTO> getAllOrdenes(){
 
-/*@GetMapping("/api/orden")
-    public List<Orden> getOrdenes(){
+        ObtenerOrdenesService obtenerOrdenesService = new ObtenerOrdenesService(ordenRepository,ordenComesRepository);
 
-     OrdenService ordenService = new OrdenService(ordenRepository,
-                clienteRepository,
-                comestiblesRepository,
-                restauranteRepository,
-                ordenComesRepository);
-
-        return ordenService.getOrdenes();
+        return obtenerOrdenesService.getAllOrdenes();
     }
 
     @GetMapping("/api/orden/{id}")
-    public List<OrdenComestibles> getOrden(@PathVariable Long id){
+    public OrdenDTO getOrdene(@PathVariable Long id){
 
-        OrdenService ordenService = new OrdenService(ordenRepository,
-                clienteRepository,
-                comestiblesRepository,
-                restauranteRepository,
-                ordenComesRepository);
+        ObtenerOrdenByIdService obtenerOrdenByIdService = new ObtenerOrdenByIdService(ordenRepository,ordenComesRepository);
 
-        return ordenService.getOrden(id);
-    }*/
-
-    @GetMapping("/api/orden")
-    public List<OrdenDTO> getOrden(){
-
-        ObtenerOrdenService obtenerOrdenService = new ObtenerOrdenService(ordenRepository,ordenComesRepository);
-
-        return obtenerOrdenService.getOrdenes();
+        return obtenerOrdenByIdService.getOrden(id);
     }
 }
