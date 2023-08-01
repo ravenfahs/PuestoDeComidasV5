@@ -1,8 +1,6 @@
 package com.restaurante.reviews.service;
 
 import com.restaurante.reviews.models.*;
-import com.restaurante.reviews.models.modeloDTO.OrdenComestibleDTO;
-import com.restaurante.reviews.models.modeloDTO.OrdenDTO;
 import com.restaurante.reviews.models.models_auxiliar.OrdenRequest;
 import com.restaurante.reviews.repository.*;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 
 @Service
 public class CrearOrdenService {
@@ -48,11 +45,11 @@ public class CrearOrdenService {
             nuevaOrden.setEstado(ordenRequest.getEstado());
             nuevaOrden.setFechaHora(LocalDateTime.of(LocalDate.now(), LocalTime.now()) );
             nuevaOrden.setTiempoEntrega(ordenRequest.getTiempoEntrega());
-            nuevaOrden.setPrecioTotal(ordenRequest.getTotal());
             nuevaOrden.setRestaurante(restaurante);
-
             nuevaOrden = ordenRepository.save(nuevaOrden);
             crearOrdenComidaService.crearOrdenComida(ordenRequest, nuevaOrden);
+            nuevaOrden.setPrecioTotal(crearOrdenComidaService.getTotalValorComestibles());
+            ordenRepository.save(nuevaOrden);
 
             return ResponseEntity.ok("Orden creada exitosamente.");
 

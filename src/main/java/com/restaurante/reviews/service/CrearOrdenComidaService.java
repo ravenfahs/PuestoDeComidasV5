@@ -12,11 +12,14 @@ public class CrearOrdenComidaService {
     private final ComestiblesRepository comestiblesRepository;
     private final OrdenComesRepository ordenComesRepository;
 
+    private double totalValorComestibles;
+
     public CrearOrdenComidaService(ComestiblesRepository comestiblesRepository,
                                                         OrdenComesRepository ordenComesRepository) {
 
         this.comestiblesRepository = comestiblesRepository;
         this.ordenComesRepository = ordenComesRepository;
+        this.totalValorComestibles = 0;
     }
 
     public void crearOrdenComida(OrdenRequest ordenRequest, Orden nuevaOrden) throws Exception {
@@ -26,15 +29,20 @@ public class CrearOrdenComidaService {
         for(ComidaEnOrden comidaEnOrden : ordenRequest.getComidas()) {
 
             OrdenComestibles ordenComestibles = new OrdenComestibles();
-            Comestibles comestibles = comestiblesRepository.findById(comidaEnOrden.getIdComida()).orElse(null);
+            Comestibles comestible = comestiblesRepository.findById(comidaEnOrden.getIdComida()).orElse(null);
 
-            if (comestibles != null) {
+            if (comestible != null) {
                 ordenComestibles.setOrden(nuevaOrden);
-                ordenComestibles.setComestibles(comestibles);
+                ordenComestibles.setComestibles(comestible);
                 ordenComestibles.setCantidad(comidaEnOrden.getCantidad());
+                totalValorComestibles += comestible.getPrecio() * comidaEnOrden.getCantidad();
 
                 ordenComesRepository.save(ordenComestibles);
             }
         }
+    }
+
+    public double getTotalValorComestibles() {
+        return totalValorComestibles;
     }
 }

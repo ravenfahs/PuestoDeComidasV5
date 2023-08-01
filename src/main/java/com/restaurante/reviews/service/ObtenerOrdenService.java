@@ -24,8 +24,7 @@ public class ObtenerOrdenService {
         try {
             List<Orden> entidadOrden = (List<Orden>) ordenRepository.findAll();
             List<OrdenDTO> ordenesDTO = new ArrayList<>();
-
-
+            
             for (Orden orden : entidadOrden) {
                 OrdenDTO ordenDTO = new OrdenDTO();
 
@@ -62,6 +61,7 @@ public class ObtenerOrdenService {
             ordenComestibleDTO.setNombre(ordenComestibles.getComestibles().getNombre());
             ordenComestibleDTO.setDescripcion(ordenComestibles.getComestibles().getDescripcion());
             ordenComestibleDTO.setCantidad(ordenComestibles.getCantidad());
+            ordenComestibleDTO.setPrecio(ordenComestibles.getComestibles().getPrecio());
 
             listComestibles.add(ordenComestibleDTO);
         }

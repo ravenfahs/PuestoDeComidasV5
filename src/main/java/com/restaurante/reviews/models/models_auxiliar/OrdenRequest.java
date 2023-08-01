@@ -8,7 +8,6 @@ import java.util.List;
 public class OrdenRequest {
     private String estado;
     private String tiempoEntrega;
-    private double total;
     private Long idRestaurante;
 
     private List<ComidaEnOrden> comidas;

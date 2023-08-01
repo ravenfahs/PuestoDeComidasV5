@@ -7,4 +7,5 @@ public class OrdenComestibleDTO {
     private String nombre;
     private String descripcion;
     private int cantidad;
+    private double precio;
 }
