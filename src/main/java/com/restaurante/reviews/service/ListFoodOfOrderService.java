@@ -21,9 +21,16 @@ public class ListFoodOfOrderService {
         List<OrdenComestibles> modelOrderFoods = orderFoodsRepository.findByOrden_Id(id);
         List<OrderFoodsDTO> listFoods = new ArrayList<>();
 
-        for (OrdenComestibles orderFoods: modelOrderFoods) {
-            listFoods.add(MapperOrdenFoods.mapToOrderFoodDTO(orderFoods));
-        }
+        modelOrderFoods.forEach(
+                orderFoods ->
+                        listFoods.add(
+                                MapperOrdenFoods.mapToOrderFoodDTO(orderFoods)
+                        )
+        );
+
+       /* for (OrdenComestibles orderFoods: modelOrderFoods) {
+                listFoods.add(MapperOrdenFoods.mapToOrderFoodDTO(orderFoods));
+        }*/
 
         return listFoods;
     }

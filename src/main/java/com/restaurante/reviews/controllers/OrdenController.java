@@ -6,6 +6,7 @@ import com.restaurante.reviews.DTO.OrderDTO;
 import com.restaurante.reviews.repository.*;
 import com.restaurante.reviews.service.CreateOrderService;
 import com.restaurante.reviews.service.GetAllOrderService;
+import com.restaurante.reviews.service.GetOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,14 +48,15 @@ public class OrdenController {
         return getAllOrderService.getAllOrder();
     }
 
-    /*@GetMapping("/api/orden")
-    public List<OrdenDTO> getAllOrdenes(){
+    @GetMapping("/api/orden/{id}")
+    public OrderDTO getOrder(@PathVariable Long id) {
 
-        ObtenerOrdenesService obtenerOrdenesService = new ObtenerOrdenesService(ordenRepository,ordenComesRepository);
+        GetOrderService getOrderService = new GetOrderService(ordenRepository, ordenFoodsRepository);
 
-        return obtenerOrdenesService.getAllOrdenes();
+        return getOrderService.getOrderbyId(id);
     }
 
+    /*
     @GetMapping("/api/orden/{id}")
     public OrdenDTO getOrdene(@PathVariable Long id){
 

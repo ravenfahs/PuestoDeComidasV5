@@ -23,7 +23,20 @@ public class CreateOrderFoodService {
 
     public void createOrdenFoods(OrdenRequestDTO ordenRequestDTO, Orden newOrden){
 
-        for (FoodOnOrderDTO foodOnOrderDTO : ordenRequestDTO.getFoods()){
+        ordenRequestDTO.getFoods().forEach(
+                (FoodOnOrderDTO foodOnOrderDTO) -> {
+
+                    Comestibles food = foodRepository.findById(foodOnOrderDTO.getIdFood()).orElse(null);
+
+                    ordenFoodsRepository.save(
+                            MapperOrdenFoods.mapToOrdenFood(food, newOrden, foodOnOrderDTO)
+                    );
+
+                    totalValueFoods += food.getPrecio() * foodOnOrderDTO.getQuantity();
+                }
+        );
+
+     /*   for (FoodOnOrderDTO foodOnOrderDTO : ordenRequestDTO.getFoods()){
 
             Comestibles food = foodRepository.findById(foodOnOrderDTO.getIdFood()).orElse(null);
 
@@ -32,7 +45,7 @@ public class CreateOrderFoodService {
             );
 
             totalValueFoods += food.getPrecio() * foodOnOrderDTO.getQuantity();
-        }
+        }*/
     }
 
     public double getTotal() {

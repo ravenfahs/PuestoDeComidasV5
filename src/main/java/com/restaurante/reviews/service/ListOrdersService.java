@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListOrdersService {
-    private  ListFoodOfOrderService listFoodOfOrderService;
+    private final ListFoodOfOrderService listFoodOfOrderService;
 
     public ListOrdersService(OrdenComesRepository orderFoodsRepository) {
         this.listFoodOfOrderService = new ListFoodOfOrderService(orderFoodsRepository);
@@ -19,7 +19,19 @@ public class ListOrdersService {
 
         List<OrderDTO> listOrdersDTO = new ArrayList<>();
 
-        for (Orden order : modelOrder) {
+        modelOrder.forEach(
+                order -> {
+                    OrderDTO orderDTO;
+                    orderDTO = MapperOrden.mapToOrderDTO(order);
+
+                    listOrdersDTO.add(
+                            MapperOrden.mapFoodsOfOrderDTO(orderDTO, listFoodOfOrderService.listFoods(order.getId())
+                            )
+                    );
+                }
+        );
+
+      /*  for (Orden order : modelOrder) {
             OrderDTO orderDTO;
 
             orderDTO = MapperOrden.mapToOrderDTO(order);
@@ -29,7 +41,7 @@ public class ListOrdersService {
                             listFoodOfOrderService.listFoods(order.getId())
                     )
             );
-        }
+        }*/
 
         return listOrdersDTO;
     }
