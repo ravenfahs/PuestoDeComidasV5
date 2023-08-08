@@ -1,6 +1,7 @@
 package com.restaurante.reviews.mappers;
 
-import com.restaurante.reviews.DTO.OrdenRequestDTO;
+import com.restaurante.reviews.DTO.ClientDTOBasico;
+import com.restaurante.reviews.DTO.OrderRequestDTO;
 import com.restaurante.reviews.DTO.OrderDTO;
 import com.restaurante.reviews.DTO.OrderFoodsDTO;
 import com.restaurante.reviews.models.*;
@@ -16,32 +17,38 @@ public final class MapperOrden {
         throw new UnsupportedOperationException("A static class cannot be instantiated");
     }
 
-    public static Orden mapToOrden(OrdenRequestDTO ordenRequestDTO, Cliente client, Restaurante foodStall){
+    public static Order mapToOrden(OrderRequestDTO orderRequestDTO, Client client, FoodStall foodStall){
 
-        Orden newOrden = new Orden();
+        Order newOrden = new Order();
 
-        newOrden.setCliente(client);
-        newOrden.setEstado(ordenRequestDTO.getState());
-        newOrden.setFechaHora(LocalDateTime.of(LocalDate.now(), LocalTime.now()) );
-        newOrden.setTiempoEntrega(ordenRequestDTO.getTimeDelivery());
-        newOrden.setRestaurante(foodStall);
+        newOrden.setClient(client);
+        newOrden.setState(orderRequestDTO.getState());
+        newOrden.setDateTime(LocalDateTime.of(LocalDate.now(), LocalTime.now()) );
+        newOrden.setTimeDelivery(orderRequestDTO.getTimeDelivery());
+        newOrden.setFoodStall(foodStall);
 
         return newOrden;
     }
 
-    public static Orden mapOrderTotal(Orden orden, double total) {
-        orden.setPrecioTotal(total);
-        return orden;
+    public static Order mapOrderTotal(Order order, double total) {
+        order.setTotal(total);
+        return order;
     }
 
-    public static OrderDTO mapToOrderDTO(Orden order){
+    public static OrderDTO mapToOrderDTO(Order order){
 
-         return new OrderDTO(order.getId(),
-                order.getEstado(),
-                order.getFechaHora(),
-                order.getTiempoEntrega(),
-                order.getPrecioTotal(),
-                order.getCliente());
+         return new OrderDTO(
+                 order.getId(),
+                order.getState(),
+                order.getDateTime(),
+                order.getTimeDelivery(),
+                order.getTotal(),
+                new ClientDTOBasico(
+                        order.getClient().getId(),
+                        order.getClient().getFullName(),
+                        order.getClient().getUserStatus().toString()
+                )
+         );
     }
 
     public static OrderDTO mapFoodsOfOrderDTO(OrderDTO orderDTO, List<OrderFoodsDTO> allFoods) {

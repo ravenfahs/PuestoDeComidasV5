@@ -1,24 +1,24 @@
-package com.restaurante.reviews.service;
+package com.restaurante.reviews.service.impl.util;
 
 import com.restaurante.reviews.DTO.OrderFoodsDTO;
 import com.restaurante.reviews.mappers.MapperOrdenFoods;
-import com.restaurante.reviews.models.OrdenComestibles;
-import com.restaurante.reviews.repository.OrdenComesRepository;
+import com.restaurante.reviews.models.OrderFoods;
+import com.restaurante.reviews.repository.OrderFoodsRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListFoodOfOrderService {
 
-    private final OrdenComesRepository orderFoodsRepository;
+    private final OrderFoodsRepository orderFoodsRepository;
 
-    public ListFoodOfOrderService(OrdenComesRepository orderFoodsRepository) {
+    public ListFoodOfOrderService(OrderFoodsRepository orderFoodsRepository) {
         this.orderFoodsRepository = orderFoodsRepository;
     }
 
     public  List<OrderFoodsDTO> listFoods(Long id) {
 
-        List<OrdenComestibles> modelOrderFoods = orderFoodsRepository.findByOrden_Id(id);
+        List<OrderFoods> modelOrderFoods = orderFoodsRepository.findByOrder_Id(id);
         List<OrderFoodsDTO> listFoods = new ArrayList<>();
 
         modelOrderFoods.forEach(

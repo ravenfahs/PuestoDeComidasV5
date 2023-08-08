@@ -1,9 +1,9 @@
-package com.restaurante.reviews.service;
+package com.restaurante.reviews.service.impl.util;
 
 import com.restaurante.reviews.DTO.OrderDTO;
 import com.restaurante.reviews.mappers.MapperOrden;
-import com.restaurante.reviews.models.Orden;
-import com.restaurante.reviews.repository.OrdenComesRepository;
+import com.restaurante.reviews.models.Order;
+import com.restaurante.reviews.repository.OrderFoodsRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +11,11 @@ import java.util.List;
 public class ListOrdersService {
     private final ListFoodOfOrderService listFoodOfOrderService;
 
-    public ListOrdersService(OrdenComesRepository orderFoodsRepository) {
+    public ListOrdersService(OrderFoodsRepository orderFoodsRepository) {
         this.listFoodOfOrderService = new ListFoodOfOrderService(orderFoodsRepository);
     }
 
-    public List<OrderDTO> listOrder(List<Orden> modelOrder) {
+    public List<OrderDTO> listOrder(List<Order> modelOrder) {
 
         List<OrderDTO> listOrdersDTO = new ArrayList<>();
 

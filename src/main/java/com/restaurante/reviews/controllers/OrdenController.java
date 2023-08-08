@@ -1,12 +1,15 @@
 package com.restaurante.reviews.controllers;
 
 
-import com.restaurante.reviews.DTO.OrdenRequestDTO;
+import com.restaurante.reviews.DTO.OrderRequestDTO;
 import com.restaurante.reviews.DTO.OrderDTO;
 import com.restaurante.reviews.repository.*;
 import com.restaurante.reviews.service.CreateOrderService;
 import com.restaurante.reviews.service.GetAllOrderService;
-import com.restaurante.reviews.service.GetOrderService;
+import com.restaurante.reviews.service.GetOrderByIdService;
+import com.restaurante.reviews.service.impl.CreateOrderServiceImpl;
+import com.restaurante.reviews.service.impl.GetAllOrderServiceImpl;
+import com.restaurante.reviews.service.impl.GetOrderByIdServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,33 +20,34 @@ import java.util.List;
 public class OrdenController {
 
     @Autowired
-    private ClienteRepository clientRepository;
+    private ClientRepository clientRepository;
     @Autowired
-    private OrdenRepository ordenRepository;
+    private OrderRepository orderRepository;
     @Autowired
-    private ComestiblesRepository foodsRepository;
+    private FoodsRepository foodsRepository;
     @Autowired
-    private RestauranteRepository foodStellRepository;
+    private FoodStellRepository foodStellRepository;
     @Autowired
-    private OrdenComesRepository ordenFoodsRepository;
+    private OrderFoodsRepository orderFoodsRepository;
+
 
 
     @PostMapping("/api/orden")
-    public ResponseEntity<String> registrarOrden(@RequestBody OrdenRequestDTO ordenRequestDTO){
+    public ResponseEntity<String> registrarOrden(@RequestBody OrderRequestDTO orderRequestDTO){
 
-       CreateOrderService orderService = new CreateOrderService(ordenRepository,
+       CreateOrderService orderService = new CreateOrderServiceImpl(orderRepository,
                                                                                                 clientRepository,
                                                                                                 foodsRepository,
                                                                                                 foodStellRepository,
-                                                                                                ordenFoodsRepository);
+               orderFoodsRepository);
 
-        return orderService.createOrden(ordenRequestDTO);
+        return orderService.createOrden(orderRequestDTO);
     }
 
     @GetMapping("/api/orden")
     public List<OrderDTO> getAllOrder(){
 
-        GetAllOrderService getAllOrderService = new GetAllOrderService(ordenRepository,ordenFoodsRepository);
+        GetAllOrderService getAllOrderService = new GetAllOrderServiceImpl(orderRepository, orderFoodsRepository);
 
         return getAllOrderService.getAllOrder();
     }
@@ -51,7 +55,7 @@ public class OrdenController {
     @GetMapping("/api/orden/{id}")
     public OrderDTO getOrder(@PathVariable Long id) {
 
-        GetOrderService getOrderService = new GetOrderService(ordenRepository, ordenFoodsRepository);
+        GetOrderByIdService getOrderService = new GetOrderByIdServiceImpl(orderRepository, orderFoodsRepository);
 
         return getOrderService.getOrderbyId(id);
     }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class OrdenRequestDTO {
+public class OrderRequestDTO {
 
     private String state;
     private String timeDelivery;

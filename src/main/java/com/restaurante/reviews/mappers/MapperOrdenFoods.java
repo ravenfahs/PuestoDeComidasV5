@@ -2,9 +2,9 @@ package com.restaurante.reviews.mappers;
 
 import com.restaurante.reviews.DTO.FoodOnOrderDTO;
 import com.restaurante.reviews.DTO.OrderFoodsDTO;
-import com.restaurante.reviews.models.Comestibles;
-import com.restaurante.reviews.models.Orden;
-import com.restaurante.reviews.models.OrdenComestibles;
+import com.restaurante.reviews.models.Foods;
+import com.restaurante.reviews.models.Order;
+import com.restaurante.reviews.models.OrderFoods;
 
 
 public final class MapperOrdenFoods {
@@ -13,25 +13,25 @@ public final class MapperOrdenFoods {
         throw new UnsupportedOperationException("A static class cannot be instantiated");
     }
 
-    public static OrdenComestibles mapToOrdenFood(Comestibles food,
-                                                                          Orden newOrden,
-                                                                          FoodOnOrderDTO foodOnOrderDTO) {
+    public static OrderFoods mapToOrdenFood(Foods food,
+                                            Order newOrden,
+                                            FoodOnOrderDTO foodOnOrderDTO) {
 
-        OrdenComestibles orderFoods = new OrdenComestibles();
+        OrderFoods orderFoods = new OrderFoods();
 
-        orderFoods.setOrden(newOrden);
-        orderFoods.setComestibles(food);
-        orderFoods.setCantidad(foodOnOrderDTO.getQuantity());
+        orderFoods.setOrder(newOrden);
+        orderFoods.setFood(food);
+        orderFoods.setQuantity(foodOnOrderDTO.getQuantity());
 
         return orderFoods;
     }
 
-    public static OrderFoodsDTO mapToOrderFoodDTO(OrdenComestibles orderFoods){
+    public static OrderFoodsDTO mapToOrderFoodDTO(OrderFoods orderFoods){
 
         return new OrderFoodsDTO(
-                                    orderFoods.getComestibles().getNombre(),
-                                    orderFoods.getComestibles().getDescripcion(),
-                                    orderFoods.getCantidad(),
-                                    orderFoods.getComestibles().getPrecio());
+                                    orderFoods.getFood().getName(),
+                                    orderFoods.getFood().getDescription(),
+                                    orderFoods.getQuantity(),
+                                    orderFoods.getFood().getPrice());
     }
 }

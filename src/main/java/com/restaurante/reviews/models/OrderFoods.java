@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "ordenComestibles")
-public class OrdenComestibles {
+@Table(name = "orderfoods")
+public class OrderFoods {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,15 +15,15 @@ public class OrdenComestibles {
     private long id;
 
     @ManyToOne()
-    @JoinColumn(name = "id_orden")
+    @JoinColumn(name = "order_id")
     @JsonIgnore
-    private Orden orden;
+    private Order order;
 
     @ManyToOne()
-    @JoinColumn(name = "id_producto")
-    private Comestibles comestibles;
+    @JoinColumn(name = "food_id")
+    private Foods food;
 
     @Column(name = "cantidad")
-    private int cantidad;
+    private int quantity;
 
 }

@@ -5,37 +5,35 @@ import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 
-
-
 @Data
 @Entity
-@Table(name = "orden")
-public class Orden {
+@Table(name = "orders")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_restaurante")
+    @JoinColumn(name = "foodStall_id")
     @JsonIgnore
-    private Restaurante restaurante;
+    private FoodStall foodStall;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente")
-    private Cliente cliente;
+    @JoinColumn(name = "client_id")
+    private Client client;
 
-    @Column(name = "fecha_hora")
-    private LocalDateTime fechaHora;
+    @Column(name = "date_time")
+    private LocalDateTime dateTime;
 
-    @Column(name = "tiempo_entrega")
-    private String tiempoEntrega;
+    @Column(name = "time_delivery")
+    private String timeDelivery;
 
-    @Column(name = "precio_total")
-    private double precioTotal;
+    @Column(name = "total")
+    private double total;
 
-    @Column(name = "estado")
-    private String estado;
+    @Column(name = "state")
+    private String state;
 
     /*
     @OneToMany( mappedBy = "orden")
