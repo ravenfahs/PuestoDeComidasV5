@@ -46,7 +46,8 @@ public final class MapperOrden {
                 new ClientDTOBasico(
                         order.getClient().getId(),
                         order.getClient().getFullName(),
-                        order.getClient().getUserStatus().toString()
+                        order.getClient().getUserStatus().toString(),
+                        order.getClient().getPhone()
                 )
          );
     }

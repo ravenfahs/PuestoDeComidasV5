@@ -49,7 +49,7 @@ public class OrdenController {
 
         GetAllOrderService getAllOrderService = new GetAllOrderServiceImpl(orderRepository, orderFoodsRepository);
 
-        return getAllOrderService.getAllOrder();
+        return getAllOrderService.getAllOrder(4L, foodStellRepository, clientRepository);
     }
 
     @GetMapping("/api/orden/{id}")
@@ -60,12 +60,4 @@ public class OrdenController {
         return getOrderService.getOrderbyId(id);
     }
 
-    /*
-    @GetMapping("/api/orden/{id}")
-    public OrdenDTO getOrdene(@PathVariable Long id){
-
-        ObtenerOrdenByIdService obtenerOrdenByIdService = new ObtenerOrdenByIdService(ordenRepository,ordenComesRepository);
-
-        return obtenerOrdenByIdService.getOrden(id);
-    }*/
 }

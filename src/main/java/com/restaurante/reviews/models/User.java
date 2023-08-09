@@ -24,4 +24,8 @@ public class User {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     protected UserStatus userStatus;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    protected UserType userType;
 }

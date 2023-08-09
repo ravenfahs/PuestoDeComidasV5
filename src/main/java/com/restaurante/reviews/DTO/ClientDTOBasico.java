@@ -10,4 +10,5 @@ public class ClientDTOBasico {
     private Long id;
     private String fullName;
     private String status;
+    private String phone;
 }

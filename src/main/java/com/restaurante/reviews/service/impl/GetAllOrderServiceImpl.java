@@ -2,10 +2,10 @@ package com.restaurante.reviews.service.impl;
 
 import com.restaurante.reviews.DTO.OrderDTO;
 import com.restaurante.reviews.models.Order;
-import com.restaurante.reviews.repository.OrderFoodsRepository;
-import com.restaurante.reviews.repository.OrderRepository;
+import com.restaurante.reviews.repository.*;
 import com.restaurante.reviews.service.GetAllOrderService;
 import com.restaurante.reviews.service.impl.util.ListOrdersService;
+import com.restaurante.reviews.service.impl.util.ValidateUserType;
 
 import java.util.List;
 
@@ -19,9 +19,10 @@ public class GetAllOrderServiceImpl implements GetAllOrderService {
     }
 
     @Override
-    public List<OrderDTO> getAllOrder() {
+    public List<OrderDTO> getAllOrder(Long id, FoodStellRepository foodStallRepository,
+                                      ClientRepository clientRepository) {
 
-            List<Order> modelOrder = (List<Order>) orderRepository.findAll();
-            return listOrdersService.listOrder(modelOrder);
+        List<Order> modelOrder = ValidateUserType.User(id,foodStallRepository, clientRepository, orderRepository);
+        return listOrdersService.listOrder(modelOrder);
     }
 }

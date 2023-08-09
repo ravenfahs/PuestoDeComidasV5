@@ -14,4 +14,7 @@ public class Client extends User{
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
+
+    @Column(name = "phone", nullable = false)
+    private String phone;
 }
