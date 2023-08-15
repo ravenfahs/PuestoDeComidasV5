@@ -1,8 +1,8 @@
 package com.restaurante.reviews.DTO;
 
-import com.restaurante.reviews.models.Client;
 import lombok.Getter;
 import lombok.Setter;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,15 +15,17 @@ public class OrderDTO {
     private String timeDelivery;
     private double total;
     private ClientDTOBasico client;
+    private Long foodStallId;
     @Setter
     private List<OrderFoodsDTO> foods;
 
-    public OrderDTO(Long id, String state, LocalDateTime dateTime, String timeDelivery, double total, ClientDTOBasico client) {
+    public OrderDTO(Long id, String state, LocalDateTime dateTime, String timeDelivery, double total, ClientDTOBasico client, Long foodStallId) {
         this.id = id;
         this.state = state;
         this.dateTime = dateTime;
         this.timeDelivery = timeDelivery;
         this.total = total;
         this.client = client;
+        this.foodStallId = foodStallId;
     }
 }

@@ -32,8 +32,9 @@ public class Order {
     @Column(name = "total")
     private double total;
 
-    @Column(name = "state")
-    private String state;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    protected OrderStatus state;
 
     /*
     @OneToMany( mappedBy = "orden")

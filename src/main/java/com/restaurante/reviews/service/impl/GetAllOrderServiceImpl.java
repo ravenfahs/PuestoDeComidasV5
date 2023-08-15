@@ -2,6 +2,7 @@ package com.restaurante.reviews.service.impl;
 
 import com.restaurante.reviews.DTO.OrderDTO;
 import com.restaurante.reviews.models.Order;
+import com.restaurante.reviews.models.User;
 import com.restaurante.reviews.repository.*;
 import com.restaurante.reviews.service.GetAllOrderService;
 import com.restaurante.reviews.service.impl.util.ListOrdersService;
@@ -20,9 +21,17 @@ public class GetAllOrderServiceImpl implements GetAllOrderService {
 
     @Override
     public List<OrderDTO> getAllOrder(Long id, FoodStellRepository foodStallRepository,
-                                      ClientRepository clientRepository) {
+                                                        ClientRepository clientRepository) {
 
-        List<Order> modelOrder = ValidateUserType.User(id,foodStallRepository, clientRepository, orderRepository);
+        User user = ValidateUserType.userType(id,foodStallRepository, clientRepository);
+        List<Order> modelOrder;
+
+        if(user.getUserType().toString().equals("FOOD_STALL")) {
+            modelOrder = orderRepository.findOrdersByFoodStall_Id(user.getId());
+        }else{
+            modelOrder = orderRepository.findOrdersByClient_Id(user.getId());
+        }
+
         return listOrdersService.listOrder(modelOrder);
     }
 }

@@ -1,0 +1,30 @@
+package com.restaurante.reviews.service.impl;
+
+import com.restaurante.reviews.exceptions.OrderNotFoundException;
+import com.restaurante.reviews.mappers.MapperOrden;
+import com.restaurante.reviews.models.Order;
+import com.restaurante.reviews.models.OrderStatus;
+import com.restaurante.reviews.repository.OrderRepository;
+import com.restaurante.reviews.service.SoftDeleteOrderStatusService;
+import org.springframework.http.ResponseEntity;
+
+public class SoftDeleteOrderStatusServiceImpl implements SoftDeleteOrderStatusService {
+
+    private final OrderRepository orderRepository;
+    public SoftDeleteOrderStatusServiceImpl(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
+    @Override
+    public ResponseEntity<String> softDeleteOrder(Long id) {
+
+        Order order = orderRepository.findByIdAndStateNot(id, OrderStatus.COMPLETE).orElseThrow(
+                ()-> new OrderNotFoundException("It is not possible to perform this action for Order with ID " + id));
+
+        orderRepository.save(
+                MapperOrden.mapToSoftDeleteOrder(order)
+        );
+
+        return ResponseEntity.ok("Order successfully deleted");
+    }
+}

@@ -22,7 +22,7 @@ public final class MapperOrden {
         Order newOrden = new Order();
 
         newOrden.setClient(client);
-        newOrden.setState(orderRequestDTO.getState());
+        newOrden.setState(OrderStatus.ACTIVE);
         newOrden.setDateTime(LocalDateTime.of(LocalDate.now(), LocalTime.now()) );
         newOrden.setTimeDelivery(orderRequestDTO.getTimeDelivery());
         newOrden.setFoodStall(foodStall);
@@ -39,7 +39,7 @@ public final class MapperOrden {
 
          return new OrderDTO(
                  order.getId(),
-                order.getState(),
+                order.getState().toString(),
                 order.getDateTime(),
                 order.getTimeDelivery(),
                 order.getTotal(),
@@ -48,7 +48,8 @@ public final class MapperOrden {
                         order.getClient().getFullName(),
                         order.getClient().getUserStatus().toString(),
                         order.getClient().getPhone()
-                )
+                ),
+                 order.getFoodStall().getId()
          );
     }
 
@@ -57,5 +58,17 @@ public final class MapperOrden {
         orderDTO.setFoods(allFoods);
 
         return orderDTO;
+    }
+
+    public static Order mapToUpdateOrder(Order order){
+
+        order.setState(OrderStatus.COMPLETE);
+        return order;
+    }
+
+    public static Order mapToSoftDeleteOrder(Order order){
+
+        order.setState(OrderStatus.CANCELED);
+        return order;
     }
 }
