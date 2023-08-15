@@ -1,13 +1,15 @@
 package com.restaurante.reviews.service.impl;
 
 import com.restaurante.reviews.DTO.FoodOnOrderDTO;
-import com.restaurante.reviews.DTO.OrderRequestDTO;
+import com.restaurante.reviews.exceptions.FoodNotFoundException;
 import com.restaurante.reviews.mappers.MapperOrdenFoods;
 import com.restaurante.reviews.models.Foods;
 import com.restaurante.reviews.models.Order;
 import com.restaurante.reviews.repository.FoodsRepository;
 import com.restaurante.reviews.repository.OrderFoodsRepository;
 import com.restaurante.reviews.service.CreateOrderFoodService;
+
+import java.util.List;
 
 public class CreateOrderFoodServiceImpl implements CreateOrderFoodService {
 
@@ -23,12 +25,13 @@ public class CreateOrderFoodServiceImpl implements CreateOrderFoodService {
     }
 
     @Override
-    public void createOrdenFoods(OrderRequestDTO orderRequestDTO, Order newOrden){
+    public void createOrdenFoods(List<FoodOnOrderDTO> listFoodOnOrderDTO, Order newOrden){
 
-        orderRequestDTO.getFoods().forEach(
+         listFoodOnOrderDTO.forEach(
                 (FoodOnOrderDTO foodOnOrderDTO) -> {
 
-                    Foods food = foodRepository.findById(foodOnOrderDTO.getIdFood()).orElse(null);
+                    Foods food = foodRepository.findById(foodOnOrderDTO.getIdFood())
+                            .orElseThrow(()-> new FoodNotFoundException("Food not found with ID: "+ foodOnOrderDTO.getIdFood()));
 
                     orderFoodsRepository.save(
                             MapperOrdenFoods.mapToOrdenFood(food, newOrden, foodOnOrderDTO)

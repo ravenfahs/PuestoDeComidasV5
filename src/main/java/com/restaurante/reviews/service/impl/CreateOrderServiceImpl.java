@@ -1,6 +1,7 @@
 package com.restaurante.reviews.service.impl;
 
 import com.restaurante.reviews.DTO.OrderRequestDTO;
+import com.restaurante.reviews.exceptions.UserNotFoundException;
 import com.restaurante.reviews.mappers.MapperOrden;
 import com.restaurante.reviews.models.Client;
 import com.restaurante.reviews.models.FoodStall;
@@ -36,14 +37,18 @@ public class CreateOrderServiceImpl implements CreateOrderService {
     public ResponseEntity<String> createOrden(OrderRequestDTO orderRequestDTO) {
 
         Long idClient= 4L;
-        Client client = clientRepository.findById(idClient).orElse(null);
-        FoodStall foodStall = foodStallRepository.findById(orderRequestDTO.getIdFoodStall()).orElse(null);
+        Client client = clientRepository.findById(idClient)
+                .orElseThrow(() -> new UserNotFoundException("Client not found with ID: "+idClient));
+
+        FoodStall foodStall = foodStallRepository.findById(orderRequestDTO.getIdFoodStall())
+                .orElseThrow(() -> new UserNotFoundException("Food Stall not found with ID: "+ orderRequestDTO.getIdFoodStall()));
+
         Order newOrden;
 
         newOrden = orderRepository.save(
                 MapperOrden.mapToOrden(orderRequestDTO, client, foodStall)
         );
-        createOrdenFoodServiceImpl.createOrdenFoods(orderRequestDTO,newOrden);
+        createOrdenFoodServiceImpl.createOrdenFoods(orderRequestDTO.getFoods(),newOrden);
         orderRepository.save(
                 MapperOrden.mapOrderTotal(newOrden, createOrdenFoodServiceImpl.getTotal())
         );

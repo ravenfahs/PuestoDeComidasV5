@@ -1,6 +1,7 @@
 package com.restaurante.reviews.service.impl;
 
 import com.restaurante.reviews.DTO.OrderDTO;
+import com.restaurante.reviews.exceptions.OrderNotFoundException;
 import com.restaurante.reviews.models.Order;
 import com.restaurante.reviews.repository.OrderFoodsRepository;
 import com.restaurante.reviews.repository.OrderRepository;
@@ -24,7 +25,9 @@ public class GetOrderByIdServiceImpl implements GetOrderByIdService {
     public OrderDTO getOrderbyId(Long id) {
 
         List<Order> modelOrder = new ArrayList<>();
-        modelOrder.add(ordenRepository.findById(id).orElse(null));
+        modelOrder.add(ordenRepository.findById(id)
+                .orElseThrow(()-> new OrderNotFoundException("Order with ID: "+id+" not found")));
+
         return listOrdersService.listOrder(modelOrder).get(0);
     }
 }

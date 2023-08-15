@@ -39,7 +39,7 @@ public class UpdateOrderStatusServiceImpl implements UpdateOrderStatusService {
 
             orderRepository.save(MapperOrden.mapToUpdateOrder(order));
 
-            return ResponseEntity.ok("Order created successfully");
+            return ResponseEntity.ok("Order successfully update");
         }
 
         throw new NotPermitsUserException("You don't have permits, you need to be a food stand");
