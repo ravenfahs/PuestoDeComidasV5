@@ -8,21 +8,31 @@ import com.restaurante.reviews.repository.*;
 import com.restaurante.reviews.service.GetAllOrderService;
 import com.restaurante.reviews.service.impl.util.ListOrdersService;
 import com.restaurante.reviews.service.impl.util.ValidateUser;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class GetAllOrderServiceImpl implements GetAllOrderService {
     private final OrderRepository orderRepository;
     private final ListOrdersService listOrdersService;
 
-    public GetAllOrderServiceImpl(OrderRepository orderRepository, OrderFoodsRepository orderFoodsRepository) {
+    private final FoodStellRepository foodStallRepository;
+    private final ClientRepository clientRepository;
+
+    public GetAllOrderServiceImpl(OrderRepository orderRepository,
+                                                OrderFoodsRepository orderFoodsRepository,
+                                                  FoodStellRepository foodStallRepository,
+                                                  ClientRepository clientRepository) {
+
         this.orderRepository = orderRepository;
         this.listOrdersService = new ListOrdersService(orderFoodsRepository);
+        this.foodStallRepository = foodStallRepository;
+        this.clientRepository = clientRepository;
     }
 
     @Override
-    public List<OrderDTO> getAllOrder(Long userID, FoodStellRepository foodStallRepository,
-                                                        ClientRepository clientRepository) {
+    public List<OrderDTO> getAllOrder(Long userID) {
 
         User user = ValidateUser.userType(userID,foodStallRepository, clientRepository);
         List<Order> modelOrder;

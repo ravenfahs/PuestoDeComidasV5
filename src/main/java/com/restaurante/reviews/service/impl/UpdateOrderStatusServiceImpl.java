@@ -19,15 +19,20 @@ import org.springframework.stereotype.Service;
 public class UpdateOrderStatusServiceImpl implements UpdateOrderStatusService {
 
     private final OrderRepository orderRepository;
+    private final  FoodStellRepository foodStallRepository;
+    private final ClientRepository clientRepository;
 
-    public UpdateOrderStatusServiceImpl(OrderRepository orderRepository) {
+    public UpdateOrderStatusServiceImpl(OrderRepository orderRepository,
+                                                            FoodStellRepository foodStallRepository,
+                                                            ClientRepository clientRepository) {
+
         this.orderRepository = orderRepository;
+        this.foodStallRepository = foodStallRepository;
+        this.clientRepository = clientRepository;
     }
 
     @Override
-    public ResponseEntity<String> updateOrder(Long userID, Long orderID,
-                                                                  FoodStellRepository foodStallRepository,
-                                                                  ClientRepository clientRepository) {
+    public ResponseEntity<String> updateOrder(Long userID, Long orderID) {
 
         Order order;
         User user = ValidateUser.userType(userID, foodStallRepository, clientRepository);

@@ -7,7 +7,9 @@ import com.restaurante.reviews.models.OrderStatus;
 import com.restaurante.reviews.repository.OrderRepository;
 import com.restaurante.reviews.service.SoftDeleteOrderStatusService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SoftDeleteOrderStatusServiceImpl implements SoftDeleteOrderStatusService {
 
     private final OrderRepository orderRepository;

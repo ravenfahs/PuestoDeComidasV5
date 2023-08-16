@@ -12,9 +12,11 @@ import com.restaurante.reviews.repository.OrderRepository;
 import com.restaurante.reviews.service.GetAllOrderByStatusService;
 import com.restaurante.reviews.service.impl.util.ListOrdersService;
 import com.restaurante.reviews.service.impl.util.ValidateUser;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class GetAllOrderByStatusServiceImpl implements GetAllOrderByStatusService {
 
     private final OrderRepository orderRepository;
@@ -38,14 +40,14 @@ public class GetAllOrderByStatusServiceImpl implements GetAllOrderByStatusServic
 
         User user = ValidateUser.userType(userID,foodStallRepository, clientRepository);
 
-        List<Order> modelOrderbyStatus;
+        List<Order> modelOrderStatus;
 
         if(user.getUserType().equals(UserType.FOOD_STALL)) {
-            modelOrderbyStatus = orderRepository.findOrdersByFoodStall_IdAndState(userID, orderStatus);
+            modelOrderStatus = orderRepository.findOrdersByFoodStall_IdAndState(userID, orderStatus);
         }else{
-            modelOrderbyStatus = orderRepository.findOrdersByClient_IdAndState(userID, orderStatus);
+            modelOrderStatus = orderRepository.findOrdersByClient_IdAndState(userID, orderStatus);
         }
 
-        return listOrdersService.listOrder(modelOrderbyStatus);
+        return listOrdersService.listOrder(modelOrderStatus);
     }
 }

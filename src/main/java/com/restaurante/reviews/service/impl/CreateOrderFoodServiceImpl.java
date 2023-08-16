@@ -27,6 +27,8 @@ public class CreateOrderFoodServiceImpl implements CreateOrderFoodService {
     @Override
     public void createOrdenFoods(List<FoodOnOrderDTO> listFoodOnOrderDTO, Order newOrden){
 
+        totalValueFoods = 0;
+
          listFoodOnOrderDTO.forEach(
                 (FoodOnOrderDTO foodOnOrderDTO) -> {
 

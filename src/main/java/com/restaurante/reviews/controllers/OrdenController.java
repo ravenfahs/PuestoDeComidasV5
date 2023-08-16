@@ -27,16 +27,30 @@ public class OrdenController {
     @Autowired
     private OrderFoodsRepository orderFoodsRepository;
 
+   private final GetAllOrderByStatusService getAllOrderByStatusService;
+   private final GetAllOrderService getAllOrderService;
+   private  final GetOrderByIdService getOrderService;
+   private final UpdateOrderStatusService updateOrderStatusService;
+   private final SoftDeleteOrderStatusService softDeleteOrderStatusService;
+   private final CreateOrderService orderService;
 
+    public OrdenController(GetAllOrderByStatusService getAllOrderByStatusService,
+                                       GetAllOrderService getAllOrderService,
+                                       GetOrderByIdService getOrderService,
+                                       UpdateOrderStatusService updateOrderStatusService,
+                                       SoftDeleteOrderStatusService softDeleteOrderStatusService,
+                                        CreateOrderService orderService) {
+
+        this.getAllOrderByStatusService = getAllOrderByStatusService;
+        this.getAllOrderService = getAllOrderService;
+        this.getOrderService = getOrderService;
+        this.updateOrderStatusService = updateOrderStatusService;
+        this.softDeleteOrderStatusService = softDeleteOrderStatusService;
+        this.orderService = orderService;
+    }
 
     @PostMapping("/api/order")
     public ResponseEntity<String> createOrden(@RequestBody OrderRequestDTO orderRequestDTO){
-
-       CreateOrderService orderService = new CreateOrderServiceImpl(orderRepository,
-                                                                                                clientRepository,
-                                                                                                foodsRepository,
-                                                                                                foodStellRepository,
-                                                                                                orderFoodsRepository);
 
         return orderService.createOrden(orderRequestDTO);
     }
@@ -47,28 +61,16 @@ public class OrdenController {
         Long userID = 5L;
 
         if (status != null) {
-
-            GetAllOrderByStatusService getAllOrderByStatusService =
-                    new GetAllOrderByStatusServiceImpl(
-                    orderRepository,
-                    orderFoodsRepository,
-                    foodStellRepository,
-                    clientRepository);
-
             return getAllOrderByStatusService.getAllOrderByStatus(userID,status);
         }
 
-        GetAllOrderService getAllOrderService = new GetAllOrderServiceImpl(orderRepository, orderFoodsRepository);
-
-        return getAllOrderService.getAllOrder(userID, foodStellRepository, clientRepository);
+        return getAllOrderService.getAllOrder(userID);
     }
 
     @GetMapping("/api/order/id/{id}")
     public OrderDTO getOrder(@PathVariable Long id) {
 
         Long userID = 5L;
-
-        GetOrderByIdService getOrderService = new GetOrderByIdServiceImpl(orderRepository, orderFoodsRepository);
 
         return getOrderService.getOrderbyId(id, userID);
     }
@@ -77,16 +79,12 @@ public class OrdenController {
     public ResponseEntity<String> updateStateOrder(@PathVariable Long id) {
 
         Long userID = 5L;
-        UpdateOrderStatusService updateOrderStatusService = new UpdateOrderStatusServiceImpl(orderRepository);
 
-        return updateOrderStatusService.updateOrder(userID, id, foodStellRepository , clientRepository);
+        return updateOrderStatusService.updateOrder(userID, id);
     }
 
     @DeleteMapping("/api/order/{id}")
     public ResponseEntity<String> softDeleteStateOrder(@PathVariable Long id) {
-
-        SoftDeleteOrderStatusService softDeleteOrderStatusService =
-                new SoftDeleteOrderStatusServiceImpl(orderRepository);
 
         return softDeleteOrderStatusService.softDeleteOrder(id);
     }
