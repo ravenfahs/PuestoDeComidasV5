@@ -11,7 +11,9 @@ import java.util.Optional;
 @Repository
 public interface OrderRepository extends CrudRepository<Order,Long> {
 
-    List<Order> findOrdersByClient_Id(Long id);
-    List<Order> findOrdersByFoodStall_Id(Long id);
-    Optional<Order> findByIdAndStateNot(Long id, OrderStatus orderStatus);
+    List<Order> findOrdersByClient_Id(Long userID);
+    List<Order> findOrdersByFoodStall_Id(Long userID);
+    List<Order> findOrdersByClient_IdAndState(Long userID, OrderStatus orderStatus);
+    List<Order> findOrdersByFoodStall_IdAndState(Long userID, OrderStatus orderStatus);
+    Optional<Order> findByIdAndStateNot(Long orderID, OrderStatus orderStatus);
 }

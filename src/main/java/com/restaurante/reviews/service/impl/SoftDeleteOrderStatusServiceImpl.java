@@ -16,10 +16,10 @@ public class SoftDeleteOrderStatusServiceImpl implements SoftDeleteOrderStatusSe
     }
 
     @Override
-    public ResponseEntity<String> softDeleteOrder(Long id) {
+    public ResponseEntity<String> softDeleteOrder(Long orderID) {
 
-        Order order = orderRepository.findByIdAndStateNot(id, OrderStatus.COMPLETE).orElseThrow(
-                ()-> new OrderNotFoundException("It is not possible to perform this action for Order with ID " + id));
+        Order order = orderRepository.findByIdAndStateNot(orderID, OrderStatus.COMPLETE).orElseThrow(
+                ()-> new OrderNotFoundException("It is not possible to perform this action for Order with ID " + orderID));
 
         orderRepository.save(
                 MapperOrden.mapToSoftDeleteOrder(order)

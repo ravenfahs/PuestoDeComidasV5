@@ -6,7 +6,7 @@ import com.restaurante.reviews.repository.ClientRepository;
 import com.restaurante.reviews.repository.FoodStellRepository;
 
 
-public final class ValidateUserType {
+public final class ValidateUser {
 
     public static User userType(Long id,
                                 FoodStellRepository foodStallRepository,

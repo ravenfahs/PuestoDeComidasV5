@@ -3,6 +3,7 @@ package com.restaurante.reviews.controllers;
 
 import com.restaurante.reviews.DTO.OrderRequestDTO;
 import com.restaurante.reviews.DTO.OrderDTO;
+import com.restaurante.reviews.models.OrderStatus;
 import com.restaurante.reviews.repository.*;
 import com.restaurante.reviews.service.*;
 import com.restaurante.reviews.service.impl.*;
@@ -41,20 +42,35 @@ public class OrdenController {
     }
 
     @GetMapping("/api/order")
-    public List<OrderDTO> getAllOrder(){
+    public List<OrderDTO> getAllOrder(@RequestParam(required = false) OrderStatus status){
 
         Long userID = 5L;
+
+        if (status != null) {
+
+            GetAllOrderByStatusService getAllOrderByStatusService =
+                    new GetAllOrderByStatusServiceImpl(
+                    orderRepository,
+                    orderFoodsRepository,
+                    foodStellRepository,
+                    clientRepository);
+
+            return getAllOrderByStatusService.getAllOrderByStatus(userID,status);
+        }
+
         GetAllOrderService getAllOrderService = new GetAllOrderServiceImpl(orderRepository, orderFoodsRepository);
 
         return getAllOrderService.getAllOrder(userID, foodStellRepository, clientRepository);
     }
 
-    @GetMapping("/api/order/{id}")
+    @GetMapping("/api/order/id/{id}")
     public OrderDTO getOrder(@PathVariable Long id) {
+
+        Long userID = 5L;
 
         GetOrderByIdService getOrderService = new GetOrderByIdServiceImpl(orderRepository, orderFoodsRepository);
 
-        return getOrderService.getOrderbyId(id);
+        return getOrderService.getOrderbyId(id, userID);
     }
 
     @PutMapping("/api/order/{id}")
@@ -74,5 +90,6 @@ public class OrdenController {
 
         return softDeleteOrderStatusService.softDeleteOrder(id);
     }
+
 
 }

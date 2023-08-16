@@ -1,6 +1,7 @@
 package com.restaurante.reviews.service.impl;
 
 import com.restaurante.reviews.DTO.OrderDTO;
+import com.restaurante.reviews.exceptions.NotPermitsUserException;
 import com.restaurante.reviews.exceptions.OrderNotFoundException;
 import com.restaurante.reviews.models.Order;
 import com.restaurante.reviews.repository.OrderFoodsRepository;
@@ -14,7 +15,7 @@ import java.util.List;
 public class GetOrderByIdServiceImpl implements GetOrderByIdService {
 
     private final OrderRepository ordenRepository;
-    private ListOrdersService listOrdersService;
+    private final ListOrdersService listOrdersService;
 
     public GetOrderByIdServiceImpl(OrderRepository orderRepository, OrderFoodsRepository orderFoodsRepository) {
         this.ordenRepository = orderRepository;
@@ -22,11 +23,22 @@ public class GetOrderByIdServiceImpl implements GetOrderByIdService {
     }
 
     @Override
-    public OrderDTO getOrderbyId(Long id) {
+    public OrderDTO getOrderbyId(Long orderID, Long userID) {
 
         List<Order> modelOrder = new ArrayList<>();
-        modelOrder.add(ordenRepository.findById(id)
-                .orElseThrow(()-> new OrderNotFoundException("Order with ID: "+id+" not found")));
+
+        Order order = ordenRepository.findById(orderID)
+                .orElseThrow(()-> new OrderNotFoundException("Order with ID: "+orderID+" not found"));
+
+
+        if(order.getFoodStall().getId().equals(userID)){
+            modelOrder.add(order);
+        }
+        else if(order.getClient().getId().equals(userID)){
+            modelOrder.add(order);
+        }else {
+            throw new NotPermitsUserException("It is not possible to perform this action for Order with ID :" + orderID);
+        }
 
         return listOrdersService.listOrder(modelOrder).get(0);
     }
