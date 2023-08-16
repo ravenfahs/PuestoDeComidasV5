@@ -4,10 +4,7 @@ package com.restaurante.reviews.controllers;
 import com.restaurante.reviews.DTO.OrderRequestDTO;
 import com.restaurante.reviews.DTO.OrderDTO;
 import com.restaurante.reviews.models.OrderStatus;
-import com.restaurante.reviews.repository.*;
 import com.restaurante.reviews.service.*;
-import com.restaurante.reviews.service.impl.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,17 +12,6 @@ import java.util.List;
 
 @RestController
 public class OrdenController {
-
-    @Autowired
-    private ClientRepository clientRepository;
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private FoodsRepository foodsRepository;
-    @Autowired
-    private FoodStellRepository foodStellRepository;
-    @Autowired
-    private OrderFoodsRepository orderFoodsRepository;
 
    private final GetAllOrderByStatusService getAllOrderByStatusService;
    private final GetAllOrderService getAllOrderService;
