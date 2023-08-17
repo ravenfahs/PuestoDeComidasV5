@@ -2,7 +2,7 @@ package com.restaurante.reviews.service.impl;
 
 import com.restaurante.reviews.exceptions.NotPermitsUserException;
 import com.restaurante.reviews.exceptions.OrderNotFoundException;
-import com.restaurante.reviews.mappers.MapperOrden;
+import com.restaurante.reviews.util.MapperOrden;
 import com.restaurante.reviews.models.Order;
 import com.restaurante.reviews.models.OrderStatus;
 import com.restaurante.reviews.models.User;
@@ -41,7 +41,8 @@ public class UpdateOrderStatusServiceImpl implements UpdateOrderStatusService {
 
             order = orderRepository.findByIdAndStateNot(orderID, OrderStatus.CANCELED)
                     .orElseThrow(() ->
-                            new OrderNotFoundException("It is not possible to perform this action for Order with ID " + orderID));
+                            new OrderNotFoundException("It is not possible to perform this action for Order with ID: " + orderID+
+                                                                         " because it has CANCELED status."));
 
             orderRepository.save(MapperOrden.mapToUpdateOrder(order));
 

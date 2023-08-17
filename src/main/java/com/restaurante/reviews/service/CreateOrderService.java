@@ -4,5 +4,5 @@ import com.restaurante.reviews.DTO.OrderRequestDTO;
 import org.springframework.http.ResponseEntity;
 
 public interface CreateOrderService {
-    ResponseEntity<String> createOrden(OrderRequestDTO orderRequestDTO);
+    ResponseEntity<String> createOrden(Long clientID, OrderRequestDTO orderRequestDTO);
 }

@@ -1,14 +1,16 @@
 package com.restaurante.reviews.service.impl;
 
 import com.restaurante.reviews.DTO.OrderRequestDTO;
+import com.restaurante.reviews.exceptions.NotPermitsUserException;
 import com.restaurante.reviews.exceptions.UserNotFoundException;
-import com.restaurante.reviews.mappers.MapperOrden;
-import com.restaurante.reviews.models.Client;
-import com.restaurante.reviews.models.FoodStall;
-import com.restaurante.reviews.models.Order;
+import com.restaurante.reviews.util.MapperOrden;
+import com.restaurante.reviews.models.*;
 import com.restaurante.reviews.repository.*;
 import com.restaurante.reviews.service.CreateOrderFoodService;
 import com.restaurante.reviews.service.CreateOrderService;
+import com.restaurante.reviews.service.impl.util.ValidateUser;
+import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +35,18 @@ public class CreateOrderServiceImpl implements CreateOrderService {
         createOrdenFoodServiceImpl = new CreateOrderFoodServiceImpl(foodRepository, orderFoodRepository);
     }
 
+    @Transactional
     @Override
-    public ResponseEntity<String> createOrden(OrderRequestDTO orderRequestDTO) {
+    public ResponseEntity<String> createOrden(Long clientID,OrderRequestDTO orderRequestDTO) {
 
-        Long idClient= 4L;
-        Client client = clientRepository.findById(idClient)
-                .orElseThrow(() -> new UserNotFoundException("Client not found with ID: "+idClient));
+        User user = ValidateUser.userType(clientID, foodStallRepository, clientRepository);
+
+        if (!(user.getUserType().equals(UserType.CLIENT))){
+            throw new NotPermitsUserException("You don't have permits, you need to be a client");
+        }
+
+        Client client = clientRepository.findById(clientID)
+                .orElseThrow(() -> new UserNotFoundException("Client not found with ID: "+clientID));
 
         FoodStall foodStall = foodStallRepository.findById(orderRequestDTO.getIdFoodStall())
                 .orElseThrow(() -> new UserNotFoundException("Food Stall not found with ID: "+ orderRequestDTO.getIdFoodStall()));
@@ -53,6 +61,6 @@ public class CreateOrderServiceImpl implements CreateOrderService {
                 MapperOrden.mapOrderTotal(newOrden, createOrdenFoodServiceImpl.getTotal())
         );
 
-        return ResponseEntity.ok("Orden creada exitosamente.");
+        return new ResponseEntity<>("Order successfully created.", HttpStatus.CREATED);
     }
 }

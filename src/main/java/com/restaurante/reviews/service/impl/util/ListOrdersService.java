@@ -1,7 +1,7 @@
 package com.restaurante.reviews.service.impl.util;
 
 import com.restaurante.reviews.DTO.OrderDTO;
-import com.restaurante.reviews.mappers.MapperOrden;
+import com.restaurante.reviews.util.MapperOrden;
 import com.restaurante.reviews.models.Order;
 import com.restaurante.reviews.repository.OrderFoodsRepository;
 

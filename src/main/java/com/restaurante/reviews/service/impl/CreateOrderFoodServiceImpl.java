@@ -2,7 +2,7 @@ package com.restaurante.reviews.service.impl;
 
 import com.restaurante.reviews.DTO.FoodOnOrderDTO;
 import com.restaurante.reviews.exceptions.FoodNotFoundException;
-import com.restaurante.reviews.mappers.MapperOrdenFoods;
+import com.restaurante.reviews.util.MapperOrdenFoods;
 import com.restaurante.reviews.models.Foods;
 import com.restaurante.reviews.models.Order;
 import com.restaurante.reviews.repository.FoodsRepository;

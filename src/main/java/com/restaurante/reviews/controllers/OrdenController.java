@@ -18,27 +18,29 @@ public class OrdenController {
    private  final GetOrderByIdService getOrderService;
    private final UpdateOrderStatusService updateOrderStatusService;
    private final SoftDeleteOrderStatusService softDeleteOrderStatusService;
-   private final CreateOrderService orderService;
+   private final CreateOrderService createOrderService;
 
     public OrdenController(GetAllOrderByStatusService getAllOrderByStatusService,
                                        GetAllOrderService getAllOrderService,
                                        GetOrderByIdService getOrderService,
                                        UpdateOrderStatusService updateOrderStatusService,
                                        SoftDeleteOrderStatusService softDeleteOrderStatusService,
-                                        CreateOrderService orderService) {
+                                        CreateOrderService createOrderService) {
 
         this.getAllOrderByStatusService = getAllOrderByStatusService;
         this.getAllOrderService = getAllOrderService;
         this.getOrderService = getOrderService;
         this.updateOrderStatusService = updateOrderStatusService;
         this.softDeleteOrderStatusService = softDeleteOrderStatusService;
-        this.orderService = orderService;
+        this.createOrderService = createOrderService;
     }
 
     @PostMapping("/api/order")
     public ResponseEntity<String> createOrden(@RequestBody OrderRequestDTO orderRequestDTO){
 
-        return orderService.createOrden(orderRequestDTO);
+        Long clientID = 1L;
+
+        return createOrderService.createOrden(clientID, orderRequestDTO);
     }
 
     @GetMapping("/api/order")

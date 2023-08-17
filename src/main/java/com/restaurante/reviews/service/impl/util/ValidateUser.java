@@ -12,9 +12,10 @@ public final class ValidateUser {
                                 FoodStellRepository foodStallRepository,
                                 ClientRepository clientRepository){
 
-     return  (foodStallRepository.findById(id).isPresent())?
+        return (foodStallRepository.findById(id).isPresent())?
                             foodStallRepository.findById(id).get() :
                             clientRepository.findById(id)
                                     .orElseThrow(() -> new UserNotFoundException("User with ID: "+ id + "not found"));
+
     }
 }
