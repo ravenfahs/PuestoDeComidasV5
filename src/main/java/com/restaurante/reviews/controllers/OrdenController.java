@@ -3,9 +3,8 @@ package com.restaurante.reviews.controllers;
 
 import com.restaurante.reviews.DTO.OrderRequestDTO;
 import com.restaurante.reviews.DTO.OrderDTO;
-import com.restaurante.reviews.models.OrderStatus;
 import com.restaurante.reviews.service.*;
-import com.restaurante.reviews.service.impl.util.ValidarOrderStatus;
+import com.restaurante.reviews.service.impl.util.VerifyOrderStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,11 +48,11 @@ public class OrdenController {
 
         Long userID = 1L;
 
-        if (status != null && ValidarOrderStatus.statusOfOrder(status.toUpperCase() )) {
+        if (status != null && VerifyOrderStatus.statusOfOrder(status.toUpperCase())) {
 
             return getAllOrderByStatusService.getAllOrderByStatus(
                         userID,
-                        ValidarOrderStatus.getStatus(status.toUpperCase())
+                        VerifyOrderStatus.statusVerified()
             );
         }
 
