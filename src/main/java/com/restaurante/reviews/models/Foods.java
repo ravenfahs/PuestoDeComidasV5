@@ -21,11 +21,14 @@ public class Foods {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "photo_dish")
-    private String photoDish;
+    @Column(name="food_drink")
+    private String foodDrink;
+
+    @Column(name = "image")
+    private String image;
 
     // Relación muchos a uno con Restaurante
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "foodStall_id")
     private FoodStall foodStall;
 

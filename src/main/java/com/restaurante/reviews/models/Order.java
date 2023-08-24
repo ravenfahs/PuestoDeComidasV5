@@ -14,12 +14,12 @@ public class Order {
     @Column(name = "id")
     private long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "foodStall_id")
     @JsonIgnore
     private FoodStall foodStall;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
 

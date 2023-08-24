@@ -5,6 +5,7 @@ import com.restaurante.reviews.DTO.OrderRequestDTO;
 import com.restaurante.reviews.DTO.OrderDTO;
 import com.restaurante.reviews.models.OrderStatus;
 import com.restaurante.reviews.service.*;
+import com.restaurante.reviews.service.impl.util.ValidarOrderStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,12 +45,16 @@ public class OrdenController {
     }
 
     @GetMapping("/api/order")
-    public List<OrderDTO> getAllOrder(@RequestParam(required = false) OrderStatus status){
+    public List<OrderDTO> getAllOrder(@RequestParam(required = false) String status){
 
-        Long userID = 5L;
+        Long userID = 1L;
 
-        if (status != null) {
-            return getAllOrderByStatusService.getAllOrderByStatus(userID,status);
+        if (status != null && ValidarOrderStatus.statusOfOrder(status.toUpperCase() )) {
+
+            return getAllOrderByStatusService.getAllOrderByStatus(
+                        userID,
+                        ValidarOrderStatus.getStatus(status.toUpperCase())
+            );
         }
 
         return getAllOrderService.getAllOrder(userID);
@@ -58,7 +63,7 @@ public class OrdenController {
     @GetMapping("/api/order/id/{id}")
     public OrderDTO getOrder(@PathVariable Long id) {
 
-        Long userID = 5L;
+        Long userID = 1L;
 
         return getOrderService.getOrderbyId(id, userID);
     }
@@ -66,7 +71,7 @@ public class OrdenController {
     @PutMapping("/api/order/{id}")
     public ResponseEntity<String> updateStateOrder(@PathVariable Long id) {
 
-        Long userID = 5L;
+        Long userID = 1L;
 
         return updateOrderStatusService.updateOrder(userID, id);
     }
