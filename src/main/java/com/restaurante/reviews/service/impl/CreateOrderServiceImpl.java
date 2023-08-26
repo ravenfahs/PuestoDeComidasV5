@@ -19,14 +19,14 @@ public class CreateOrderServiceImpl implements CreateOrderService {
 
     private final OrderRepository orderRepository;
     private final ClientRepository clientRepository;
-    private final FoodStellRepository foodStallRepository;
+    private final FoodStallRepository foodStallRepository;
     private final CreateOrderFoodService createOrdenFoodServiceImpl;
 
 
     public CreateOrderServiceImpl(OrderRepository orderRepository,
                                   ClientRepository clientRepository,
                                   FoodsRepository foodRepository,
-                                  FoodStellRepository foodStallRepository,
+                                  FoodStallRepository foodStallRepository,
                                   OrderFoodsRepository orderFoodRepository) {
 
         this.orderRepository = orderRepository;

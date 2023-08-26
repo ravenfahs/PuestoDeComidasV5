@@ -6,7 +6,7 @@ import com.restaurante.reviews.models.OrderStatus;
 import com.restaurante.reviews.models.User;
 import com.restaurante.reviews.models.UserType;
 import com.restaurante.reviews.repository.ClientRepository;
-import com.restaurante.reviews.repository.FoodStellRepository;
+import com.restaurante.reviews.repository.FoodStallRepository;
 import com.restaurante.reviews.repository.OrderFoodsRepository;
 import com.restaurante.reviews.repository.OrderRepository;
 import com.restaurante.reviews.service.GetAllOrderByStatusService;
@@ -21,13 +21,13 @@ public class GetAllOrderByStatusServiceImpl implements GetAllOrderByStatusServic
 
     private final OrderRepository orderRepository;
     private final ListOrdersService listOrdersService;
-    private final FoodStellRepository foodStallRepository;
+    private final FoodStallRepository foodStallRepository;
    private final  ClientRepository clientRepository;
 
     public GetAllOrderByStatusServiceImpl(OrderRepository orderRepository,
-                                                              OrderFoodsRepository orderFoodsRepository,
-                                                              FoodStellRepository foodStallRepository,
-                                                              ClientRepository clientRepository) {
+                                          OrderFoodsRepository orderFoodsRepository,
+                                          FoodStallRepository foodStallRepository,
+                                          ClientRepository clientRepository) {
 
         this.orderRepository = orderRepository;
         this.listOrdersService = new ListOrdersService(orderFoodsRepository);

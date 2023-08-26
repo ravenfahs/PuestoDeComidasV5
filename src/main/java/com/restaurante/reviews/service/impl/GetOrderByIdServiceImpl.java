@@ -35,15 +35,11 @@ public class GetOrderByIdServiceImpl implements GetOrderByIdService {
                 .orElseThrow(()-> new OrderNotFoundException("Order with ID: "+orderID+" not found"));
 
 
-        if(order.getFoodStall().getId().equals(userID)){
-            modelOrder.add(order);
-        }
-        else if(order.getClient().getId().equals(userID)){
-            modelOrder.add(order);
-        }else {
+        if(!(order.getFoodStall().getId().equals(userID)  || order.getClient().getId().equals(userID))){
             throw new NotPermitsUserException("It is not possible to perform this action for Order with ID :" + orderID);
         }
 
+        modelOrder.add(order);
         return listOrdersService.listOrder(modelOrder).get(0);
     }
 }

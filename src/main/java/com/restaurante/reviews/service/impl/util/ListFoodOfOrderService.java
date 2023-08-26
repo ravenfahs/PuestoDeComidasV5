@@ -27,11 +27,7 @@ public class ListFoodOfOrderService {
                                 MapperOrdenFoods.mapToOrderFoodDTO(orderFoods)
                         )
         );
-
-       /* for (OrdenComestibles orderFoods: modelOrderFoods) {
-                listFoods.add(MapperOrdenFoods.mapToOrderFoodDTO(orderFoods));
-        }*/
-
+        
         return listFoods;
     }
 }

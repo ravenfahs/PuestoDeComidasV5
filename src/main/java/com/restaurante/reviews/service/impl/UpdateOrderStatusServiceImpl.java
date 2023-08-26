@@ -8,7 +8,7 @@ import com.restaurante.reviews.models.OrderStatus;
 import com.restaurante.reviews.models.User;
 import com.restaurante.reviews.models.UserType;
 import com.restaurante.reviews.repository.ClientRepository;
-import com.restaurante.reviews.repository.FoodStellRepository;
+import com.restaurante.reviews.repository.FoodStallRepository;
 import com.restaurante.reviews.repository.OrderRepository;
 import com.restaurante.reviews.service.UpdateOrderStatusService;
 import com.restaurante.reviews.service.impl.util.ValidateUser;
@@ -19,11 +19,11 @@ import org.springframework.stereotype.Service;
 public class UpdateOrderStatusServiceImpl implements UpdateOrderStatusService {
 
     private final OrderRepository orderRepository;
-    private final  FoodStellRepository foodStallRepository;
+    private final  FoodStallRepository foodStallRepository;
     private final ClientRepository clientRepository;
 
     public UpdateOrderStatusServiceImpl(OrderRepository orderRepository,
-                                                            FoodStellRepository foodStallRepository,
+                                                            FoodStallRepository foodStallRepository,
                                                             ClientRepository clientRepository) {
 
         this.orderRepository = orderRepository;

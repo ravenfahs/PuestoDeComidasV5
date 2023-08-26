@@ -42,17 +42,6 @@ public class CreateOrderFoodServiceImpl implements CreateOrderFoodService {
                     totalValueFoods += food.getPrice() * foodOnOrderDTO.getQuantity();
                 }
         );
-
-     /*   for (FoodOnOrderDTO foodOnOrderDTO : ordenRequestDTO.getFoods()){
-
-            Comestibles food = foodRepository.findById(foodOnOrderDTO.getIdFood()).orElse(null);
-
-            ordenFoodsRepository.save(
-                    MapperOrdenFoods.mapToOrdenFood(food, newOrden, foodOnOrderDTO)
-            );
-
-            totalValueFoods += food.getPrecio() * foodOnOrderDTO.getQuantity();
-        }*/
     }
 
     @Override

@@ -17,12 +17,12 @@ public class GetAllOrderServiceImpl implements GetAllOrderService {
     private final OrderRepository orderRepository;
     private final ListOrdersService listOrdersService;
 
-    private final FoodStellRepository foodStallRepository;
+    private final FoodStallRepository foodStallRepository;
     private final ClientRepository clientRepository;
 
     public GetAllOrderServiceImpl(OrderRepository orderRepository,
-                                                OrderFoodsRepository orderFoodsRepository,
-                                                  FoodStellRepository foodStallRepository,
+                                                  OrderFoodsRepository orderFoodsRepository,
+                                                  FoodStallRepository foodStallRepository,
                                                   ClientRepository clientRepository) {
 
         this.orderRepository = orderRepository;

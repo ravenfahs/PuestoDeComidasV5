@@ -25,23 +25,10 @@ public class ListOrdersService {
                     orderDTO = MapperOrden.mapToOrderDTO(order);
 
                     listOrdersDTO.add(
-                            MapperOrden.mapFoodsOfOrderDTO(orderDTO, listFoodOfOrderService.listFoods(order.getId())
-                            )
+                            MapperOrden.mapFoodsOfOrderDTO(orderDTO, listFoodOfOrderService.listFoods(order.getId()))
                     );
                 }
         );
-
-      /*  for (Orden order : modelOrder) {
-            OrderDTO orderDTO;
-
-            orderDTO = MapperOrden.mapToOrderDTO(order);
-            listOrdersDTO.add(
-                    MapperOrden.mapFoodsOfOrderDTO(
-                            orderDTO,
-                            listFoodOfOrderService.listFoods(order.getId())
-                    )
-            );
-        }*/
 
         return listOrdersDTO;
     }

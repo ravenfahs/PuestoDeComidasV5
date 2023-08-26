@@ -3,13 +3,13 @@ package com.restaurante.reviews.service.impl.util;
 import com.restaurante.reviews.exceptions.UserNotFoundException;
 import com.restaurante.reviews.models.User;
 import com.restaurante.reviews.repository.ClientRepository;
-import com.restaurante.reviews.repository.FoodStellRepository;
+import com.restaurante.reviews.repository.FoodStallRepository;
 
 
 public final class ValidateUser {
 
     public static User userType(Long id,
-                                FoodStellRepository foodStallRepository,
+                                FoodStallRepository foodStallRepository,
                                 ClientRepository clientRepository){
 
         return (foodStallRepository.findById(id).isPresent())?
