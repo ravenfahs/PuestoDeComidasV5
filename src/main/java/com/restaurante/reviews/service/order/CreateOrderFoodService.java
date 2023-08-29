@@ -1,4 +1,4 @@
-package com.restaurante.reviews.service;
+package com.restaurante.reviews.service.order;
 
 import com.restaurante.reviews.DTO.FoodOnOrderDTO;
 import com.restaurante.reviews.DTO.OrderRequestDTO;

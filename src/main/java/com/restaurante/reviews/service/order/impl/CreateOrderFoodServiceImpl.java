@@ -1,13 +1,13 @@
-package com.restaurante.reviews.service.impl;
+package com.restaurante.reviews.service.order.impl;
 
 import com.restaurante.reviews.DTO.FoodOnOrderDTO;
 import com.restaurante.reviews.exceptions.FoodNotFoundException;
-import com.restaurante.reviews.util.MapperOrdenFoods;
+import com.restaurante.reviews.service.order.mappers.MapperOrdenFoods;
 import com.restaurante.reviews.models.Foods;
 import com.restaurante.reviews.models.Order;
 import com.restaurante.reviews.repository.FoodsRepository;
 import com.restaurante.reviews.repository.OrderFoodsRepository;
-import com.restaurante.reviews.service.CreateOrderFoodService;
+import com.restaurante.reviews.service.order.CreateOrderFoodService;
 
 import java.util.List;
 

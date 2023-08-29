@@ -1,4 +1,4 @@
-package com.restaurante.reviews.service.impl;
+package com.restaurante.reviews.service.order.impl;
 
 import com.restaurante.reviews.DTO.OrderDTO;
 import com.restaurante.reviews.exceptions.NotPermitsUserException;
@@ -6,8 +6,8 @@ import com.restaurante.reviews.exceptions.OrderNotFoundException;
 import com.restaurante.reviews.models.Order;
 import com.restaurante.reviews.repository.OrderFoodsRepository;
 import com.restaurante.reviews.repository.OrderRepository;
-import com.restaurante.reviews.service.GetOrderByIdService;
-import com.restaurante.reviews.service.impl.util.ListOrdersService;
+import com.restaurante.reviews.service.order.GetOrderByIdService;
+import com.restaurante.reviews.service.order.util.ListOrdersService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

@@ -1,11 +1,11 @@
-package com.restaurante.reviews.service.impl;
+package com.restaurante.reviews.service.order.impl;
 
 import com.restaurante.reviews.exceptions.OrderNotFoundException;
-import com.restaurante.reviews.util.MapperOrden;
+import com.restaurante.reviews.service.order.mappers.MapperOrden;
 import com.restaurante.reviews.models.Order;
 import com.restaurante.reviews.models.OrderStatus;
 import com.restaurante.reviews.repository.OrderRepository;
-import com.restaurante.reviews.service.SoftDeleteOrderStatusService;
+import com.restaurante.reviews.service.order.SoftDeleteOrderStatusService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

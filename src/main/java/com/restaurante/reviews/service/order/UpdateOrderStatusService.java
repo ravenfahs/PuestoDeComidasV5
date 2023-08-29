@@ -1,4 +1,4 @@
-package com.restaurante.reviews.service;
+package com.restaurante.reviews.service.order;
 
 import org.springframework.http.ResponseEntity;
 

@@ -1,8 +1,9 @@
-package com.restaurante.reviews.service.impl;
+package com.restaurante.reviews.service.order.impl;
 
 import com.restaurante.reviews.exceptions.NotPermitsUserException;
 import com.restaurante.reviews.exceptions.OrderNotFoundException;
-import com.restaurante.reviews.util.MapperOrden;
+import com.restaurante.reviews.service.order.util.ValidateUser;
+import com.restaurante.reviews.service.order.mappers.MapperOrden;
 import com.restaurante.reviews.models.Order;
 import com.restaurante.reviews.models.OrderStatus;
 import com.restaurante.reviews.models.User;
@@ -10,8 +11,7 @@ import com.restaurante.reviews.models.UserType;
 import com.restaurante.reviews.repository.ClientRepository;
 import com.restaurante.reviews.repository.FoodStallRepository;
 import com.restaurante.reviews.repository.OrderRepository;
-import com.restaurante.reviews.service.UpdateOrderStatusService;
-import com.restaurante.reviews.service.impl.util.ValidateUser;
+import com.restaurante.reviews.service.order.UpdateOrderStatusService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

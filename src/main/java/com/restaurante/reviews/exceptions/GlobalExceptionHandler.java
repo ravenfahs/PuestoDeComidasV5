@@ -47,4 +47,16 @@ public class GlobalExceptionHandler {
 
         return ExceptionHandler(exception, request, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(AuthenticationErrorException.class)
+    public ResponseEntity<ErrorDTO> handlerAuthenticationErrorException(AuthenticationErrorException exception, WebRequest request){
+
+        return ExceptionHandler(exception, request, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<ErrorDTO> handlerInvalidTokenException(InvalidTokenException exception, WebRequest request){
+
+        return ExceptionHandler(exception, request, HttpStatus.UNAUTHORIZED);
+    }
 }

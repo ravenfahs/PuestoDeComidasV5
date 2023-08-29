@@ -1,4 +1,4 @@
-package com.restaurante.reviews.service.impl.util;
+package com.restaurante.reviews.service.order.util;
 
 import com.restaurante.reviews.exceptions.UserNotFoundException;
 import com.restaurante.reviews.models.User;

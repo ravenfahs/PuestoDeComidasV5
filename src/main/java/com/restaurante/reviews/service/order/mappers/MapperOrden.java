@@ -1,4 +1,4 @@
-package com.restaurante.reviews.util;
+package com.restaurante.reviews.service.order.mappers;
 
 import com.restaurante.reviews.DTO.ClientDTOBasico;
 import com.restaurante.reviews.DTO.OrderRequestDTO;

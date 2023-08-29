@@ -1,4 +1,4 @@
-package com.restaurante.reviews.service.impl;
+package com.restaurante.reviews.service.order.impl;
 
 import com.restaurante.reviews.DTO.OrderDTO;
 import com.restaurante.reviews.models.Order;
@@ -9,9 +9,9 @@ import com.restaurante.reviews.repository.ClientRepository;
 import com.restaurante.reviews.repository.FoodStallRepository;
 import com.restaurante.reviews.repository.OrderFoodsRepository;
 import com.restaurante.reviews.repository.OrderRepository;
-import com.restaurante.reviews.service.GetAllOrderByStatusService;
-import com.restaurante.reviews.service.impl.util.ListOrdersService;
-import com.restaurante.reviews.service.impl.util.ValidateUser;
+import com.restaurante.reviews.service.order.GetAllOrderByStatusService;
+import com.restaurante.reviews.service.order.util.ListOrdersService;
+import com.restaurante.reviews.service.order.util.ValidateUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
