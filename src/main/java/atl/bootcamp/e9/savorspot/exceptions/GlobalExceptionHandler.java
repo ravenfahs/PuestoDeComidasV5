@@ -54,6 +54,11 @@ public class GlobalExceptionHandler {
         return ExceptionHandler(exception, request, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(ReviewNotFoundException.class)
+    public ResponseEntity<ErrorDTO> handlerReviewNotFoundException(ReviewNotFoundException exception, WebRequest request) {
+        return ExceptionHandler(exception, request, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(AuthenticationErrorException.class)
     public ResponseEntity<ErrorDTO> handlerAuthenticationErrorException(AuthenticationErrorException exception, WebRequest request){
 

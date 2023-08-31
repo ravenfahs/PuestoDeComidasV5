@@ -1,6 +1,6 @@
 package atl.bootcamp.e9.savorspot.service.order;
 
-import atl.bootcamp.e9.savorspot.DTO.FoodOnOrderDTO;
+import atl.bootcamp.e9.savorspot.DTO.OrderDTO.FoodOnOrderDTO;
 import atl.bootcamp.e9.savorspot.models.Order;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package atl.bootcamp.e9.savorspot.service.order;
 
-import atl.bootcamp.e9.savorspot.DTO.OrderRequestDTO;
+import atl.bootcamp.e9.savorspot.DTO.OrderDTO.OrderRequestDTO;
 import org.springframework.http.ResponseEntity;
 
 public interface CreateOrderService {

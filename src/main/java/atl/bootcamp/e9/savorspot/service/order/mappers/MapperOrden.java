@@ -1,9 +1,9 @@
 package atl.bootcamp.e9.savorspot.service.order.mappers;
 
-import atl.bootcamp.e9.savorspot.DTO.ClientDTOBasico;
-import atl.bootcamp.e9.savorspot.DTO.OrderRequestDTO;
-import atl.bootcamp.e9.savorspot.DTO.OrderDTO;
-import atl.bootcamp.e9.savorspot.DTO.OrderFoodsDTO;
+import atl.bootcamp.e9.savorspot.DTO.ClientDTO.ClientDTOBasico;
+import atl.bootcamp.e9.savorspot.DTO.OrderDTO.OrderRequestDTO;
+import atl.bootcamp.e9.savorspot.DTO.OrderDTO.OrderDTO;
+import atl.bootcamp.e9.savorspot.DTO.OrderDTO.OrderFoodsDTO;
 import atl.bootcamp.e9.savorspot.models.Client;
 import atl.bootcamp.e9.savorspot.models.FoodStall;
 import atl.bootcamp.e9.savorspot.models.Order;

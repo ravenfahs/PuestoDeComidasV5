@@ -7,7 +7,7 @@ import atl.bootcamp.e9.savorspot.repository.OrderFoodsRepository;
 import atl.bootcamp.e9.savorspot.repository.OrderRepository;
 import atl.bootcamp.e9.savorspot.service.order.util.ListOrdersService;
 import atl.bootcamp.e9.savorspot.service.order.util.ValidateUser;
-import atl.bootcamp.e9.savorspot.DTO.OrderDTO;
+import atl.bootcamp.e9.savorspot.DTO.OrderDTO.OrderDTO;
 import atl.bootcamp.e9.savorspot.models.Order;
 import atl.bootcamp.e9.savorspot.models.User;
 import atl.bootcamp.e9.savorspot.service.order.GetAllOrderService;

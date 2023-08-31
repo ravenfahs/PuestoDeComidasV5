@@ -1,5 +1,6 @@
-package atl.bootcamp.e9.savorspot.DTO;
+package atl.bootcamp.e9.savorspot.DTO.OrderDTO;
 
+import atl.bootcamp.e9.savorspot.DTO.ClientDTO.ClientDTOBasico;
 import lombok.Getter;
 import lombok.Setter;
 

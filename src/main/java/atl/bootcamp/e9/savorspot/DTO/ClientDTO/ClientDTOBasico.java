@@ -1,4 +1,4 @@
-package atl.bootcamp.e9.savorspot.DTO;
+package atl.bootcamp.e9.savorspot.DTO.ClientDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

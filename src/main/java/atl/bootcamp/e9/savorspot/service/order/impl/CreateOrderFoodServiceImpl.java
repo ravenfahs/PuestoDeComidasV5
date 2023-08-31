@@ -3,7 +3,7 @@ package atl.bootcamp.e9.savorspot.service.order.impl;
 import atl.bootcamp.e9.savorspot.exceptions.FoodNotFoundException;
 import atl.bootcamp.e9.savorspot.models.Foods;
 import atl.bootcamp.e9.savorspot.repository.OrderFoodsRepository;
-import atl.bootcamp.e9.savorspot.DTO.FoodOnOrderDTO;
+import atl.bootcamp.e9.savorspot.DTO.OrderDTO.FoodOnOrderDTO;
 import atl.bootcamp.e9.savorspot.service.order.mappers.MapperOrdenFoods;
 import atl.bootcamp.e9.savorspot.models.Order;
 import atl.bootcamp.e9.savorspot.repository.FoodsRepository;

@@ -1,8 +1,8 @@
 package atl.bootcamp.e9.savorspot.controllers;
 
 
-import atl.bootcamp.e9.savorspot.DTO.OrderDTO;
-import atl.bootcamp.e9.savorspot.DTO.OrderRequestDTO;
+import atl.bootcamp.e9.savorspot.DTO.OrderDTO.OrderDTO;
+import atl.bootcamp.e9.savorspot.DTO.OrderDTO.OrderRequestDTO;
 import atl.bootcamp.e9.savorspot.security.JWTUtil;
 import atl.bootcamp.e9.savorspot.security.ValidateToken;
 import atl.bootcamp.e9.savorspot.service.order.*;

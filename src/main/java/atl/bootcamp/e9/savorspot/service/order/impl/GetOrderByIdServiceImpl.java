@@ -2,7 +2,7 @@ package atl.bootcamp.e9.savorspot.service.order.impl;
 
 import atl.bootcamp.e9.savorspot.repository.OrderFoodsRepository;
 import atl.bootcamp.e9.savorspot.service.order.util.ListOrdersService;
-import atl.bootcamp.e9.savorspot.DTO.OrderDTO;
+import atl.bootcamp.e9.savorspot.DTO.OrderDTO.OrderDTO;
 import atl.bootcamp.e9.savorspot.exceptions.NotPermitsUserException;
 import atl.bootcamp.e9.savorspot.exceptions.OrderNotFoundException;
 import atl.bootcamp.e9.savorspot.models.Order;

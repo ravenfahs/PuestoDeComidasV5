@@ -2,7 +2,7 @@ package atl.bootcamp.e9.savorspot.service.order.impl;
 
 import atl.bootcamp.e9.savorspot.models.*;
 import atl.bootcamp.e9.savorspot.repository.*;
-import atl.bootcamp.e9.savorspot.DTO.OrderRequestDTO;
+import atl.bootcamp.e9.savorspot.DTO.OrderDTO.OrderRequestDTO;
 import atl.bootcamp.e9.savorspot.exceptions.NotPermitsUserException;
 import atl.bootcamp.e9.savorspot.exceptions.UserNotFoundException;
 import atl.bootcamp.e9.savorspot.service.order.util.ValidateUser;
